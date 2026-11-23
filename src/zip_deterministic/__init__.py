@@ -36,7 +36,7 @@ __all__ = [
     "zip_bytes",
 ]
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 #: 1980-01-01 00:00:00, the earliest timestamp a zip file can store.
 DEFAULT_DATE_TIME = (1980, 1, 1, 0, 0, 0)

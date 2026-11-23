@@ -1,5 +1,7 @@
 # Changelog
 
+- 0.1.2 — ship a `py.typed` marker; the docstring examples now run in the test suite.
+
 ## 0.1.1
 
 - Member names are normalised to forward slashes on every platform. Before this,
