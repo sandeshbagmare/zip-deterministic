@@ -64,6 +64,17 @@
     border-top: 1px solid var(--line); padding: 26px 20px; color: var(--muted);
     font-size: 14px; text-align: center;
   }
+  .others { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .others h2 { margin-top: 0; padding-top: 0; border-top: none; font-size: 20px; }
+  .others p { color: var(--muted); }
+  .others ul {
+    list-style: none; padding: 0; margin: 16px 0 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px 22px;
+  }
+  .others li { margin: 0; font-size: 15px; }
+  .others a { color: var(--soft); text-decoration: none; }
+  .others a:hover { text-decoration: underline; }
+  .others span { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -118,6 +129,34 @@ write_tar(&quot;release.tar.gz&quot;, {&quot;a.txt&quot;: b&quot;a&quot;})</code
 <p>The suite covers every line of the package (<code>pytest --cov --cov-branch</code>), and the examples in the docstrings run as tests through <code>--doctest-modules</code>.</p>
 <h2>License</h2>
 <p>MIT.</p>
+<section class="others">
+  <h2>Other libraries here</h2>
+  <p>One problem each, standard library only, no runtime dependencies.</p>
+  <ul>
+    <li><a href="https://sandeshbagmare.github.io/argrepair/">argrepair</a> <span>— turn a bad tool call into a message the model can act on</span></li>
+    <li><a href="https://sandeshbagmare.github.io/backoff-headers/">backoff-headers</a> <span>— turn a rate-limit header into the exact time to wait</span></li>
+    <li><a href="https://sandeshbagmare.github.io/columncheck/">columncheck</a> <span>— find the CSV defect before the pipeline does</span></li>
+    <li><a href="https://sandeshbagmare.github.io/dir-digest/">dir-digest</a> <span>— one hash for a directory tree, identical on every OS</span></li>
+    <li><a href="https://sandeshbagmare.github.io/docanchor/">docanchor</a> <span>— catch every broken heading anchor in your docs</span></li>
+    <li><a href="https://sandeshbagmare.github.io/envfile-diff/">envfile-diff</a> <span>— diff two .env files without printing the secrets</span></li>
+    <li><a href="https://sandeshbagmare.github.io/fsync-replace/">fsync-replace</a> <span>— replace a file so a crash cannot leave it half-written</span></li>
+    <li><a href="https://sandeshbagmare.github.io/header-date/">header-date</a> <span>— HTTP dates parsed strictly, formatted correctly</span></li>
+    <li><a href="https://sandeshbagmare.github.io/junit-merge/">junit-merge</a> <span>— merge JUnit XML from every job into one honest report</span></li>
+    <li><a href="https://sandeshbagmare.github.io/npm-semver/">npm-semver</a> <span>— npm semver ranges, parsed the way npm parses them</span></li>
+    <li><a href="https://sandeshbagmare.github.io/outputcap/">outputcap</a> <span>— keep a huge tool result out of the context window</span></li>
+    <li><a href="https://sandeshbagmare.github.io/outputcap-cli/">outputcap-cli</a> <span>— </span></li>
+    <li><a href="https://sandeshbagmare.github.io/parse-size/">parse-size</a> <span>— byte sizes in and out, MB and MiB never confused</span></li>
+    <li><a href="https://sandeshbagmare.github.io/path-containment/">path-containment</a> <span>— keep untrusted paths inside their directory</span></li>
+    <li><a href="https://sandeshbagmare.github.io/redactscope/">redactscope</a> <span>— stop secrets in tool results before they reach the model</span></li>
+    <li><a href="https://sandeshbagmare.github.io/runbudget/">runbudget</a> <span>— a per-run cost cap that warns before it stops</span></li>
+    <li><a href="https://sandeshbagmare.github.io/testflakes/">testflakes</a> <span>— rank your flaky tests from the history you already have</span></li>
+    <li><a href="https://sandeshbagmare.github.io/tool-loop-guard/">tool-loop-guard</a> <span>— catch an agent repeating itself while it is still cheap</span></li>
+    <li><a href="https://sandeshbagmare.github.io/toolcall-ledger/">toolcall-ledger</a> <span>— a hash-chained record of every tool call</span></li>
+    <li><a href="https://sandeshbagmare.github.io/toolcircuit/">toolcircuit</a> <span>— stop retrying a tool that is down</span></li>
+    <li><a href="https://sandeshbagmare.github.io/toolquota/">toolquota</a> <span>— client-side rate limits your agent loop can wait on</span></li>
+    <li><a href="https://sandeshbagmare.github.io/wheeldeps/">wheeldeps</a> <span>— read a wheel's dependencies offline, markers included</span></li>
+  </ul>
+</section>
 </main>
 <footer>
   zip-deterministic · MIT · standard library only ·
