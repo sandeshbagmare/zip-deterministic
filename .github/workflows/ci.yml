@@ -33,3 +33,15 @@ jobs:
       - run: python -m pip install -e ".[test]" ruff
       - run: python -m ruff check .
       - run: python -m pytest -q
+
+  coverage:
+    # One job measures coverage so the matrix stays fast; the gate fails the build if a
+    # change leaves code the suite never runs.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ".[test]" pytest-cov
+      - run: python -m pytest -q --cov=zip_deterministic --cov-branch --cov-fail-under=95
