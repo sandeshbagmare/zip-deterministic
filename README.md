@@ -1,31 +1,23 @@
-# zip-deterministic
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sandeshbagmare/zip-deterministic/main/assets/banner.svg" width="100%" alt="zip-deterministic: byte-identical archives, build after build">
+</p>
 
-[![PyPI](https://img.shields.io/pypi/v/zip-deterministic.svg)](https://pypi.org/project/zip-deterministic/)
-[![Python](https://img.shields.io/pypi/pyversions/zip-deterministic.svg)](https://pypi.org/project/zip-deterministic/)
-[![tests](https://github.com/sandeshbagmare/zip-deterministic/actions/workflows/ci.yml/badge.svg)](https://github.com/sandeshbagmare/zip-deterministic/actions/workflows/ci.yml)
-[![license](https://img.shields.io/pypi/l/zip-deterministic.svg)](https://github.com/sandeshbagmare/zip-deterministic/blob/main/LICENSE)
+<p align="center">
+  <a href="https://pypi.org/project/zip-deterministic/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/zip-deterministic.svg"></a>
+  <a href="https://pypi.org/project/zip-deterministic/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/zip-deterministic.svg"></a>
+  <a href="https://pypi.org/project/zip-deterministic/"><img alt="Downloads" src="https://img.shields.io/pypi/dm/zip-deterministic.svg"></a>
+  <a href="https://github.com/sandeshbagmare/zip-deterministic/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/sandeshbagmare/zip-deterministic/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/sandeshbagmare/zip-deterministic/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/pypi/l/zip-deterministic.svg"></a>
+  <a href="https://sandeshbagmare.github.io/zip-deterministic/"><img alt="docs" src="https://img.shields.io/badge/docs-online-2ea44f.svg"></a>
+  <a href="https://pypi.org/project/zip-deterministic/"><img alt="zero dependencies" src="https://img.shields.io/badge/dependencies-0-2ea44f.svg"></a>
+</p>
 
-Build the same archive twice, get the **same bytes**.
+<h3 align="center">byte-identical archives, build after build</h3>
+<p align="center"><em>Standard library only. No runtime dependencies. Python 3.9+.</em></p>
 
-```python
-from zip_deterministic import zip_bytes
-
-assert zip_bytes({"a.txt": b"hello"}) == zip_bytes({"a.txt": b"hello"})
-```
-
-A zip or tar file stores the modification time, permission bits and member order of
-everything it contains, so two builds of the same tree normally differ. That breaks
-cache keys, signatures, reproducible builds and "did this artifact really change?"
-comparisons. This package pins all of it:
-
-| value | default | why |
-| ----- | ------- | --- |
-| modification time | `1980-01-01 00:00:00` for zip, `0` for tar | the earliest zip can store, and the reproducible-builds convention for tar |
-| permissions | `0o644` | no umask, no author's home directory leaking into the artifact |
-| member order | sorted by name | the order of a `dict` or a directory listing must not matter |
-| gzip header | no timestamp, no file name | `gzip` writes the current time and the name of the file it compressed |
-
-Zero dependencies, Python 3.9+.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sandeshbagmare/zip-deterministic/main/assets/how.svg" width="720" alt="how zip-deterministic fits in">
+</p>
 
 ## Install
 
