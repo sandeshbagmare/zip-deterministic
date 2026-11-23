@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- Member names are normalised to forward slashes on every platform. Before this,
+  a name containing a backslash kept it when the package ran on POSIX, producing an
+  archive that extracted as a file literally named ``dir.txt``.
+
 ## 0.1.0
 
 First release.

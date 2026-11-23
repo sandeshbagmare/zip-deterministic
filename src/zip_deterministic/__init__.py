@@ -36,13 +36,18 @@ __all__ = [
     "zip_bytes",
 ]
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 #: 1980-01-01 00:00:00, the earliest timestamp a zip file can store.
 DEFAULT_DATE_TIME = (1980, 1, 1, 0, 0, 0)
 DEFAULT_MODE = 0o644
 
 Entry = tuple[str, bytes]
+
+
+def _normalise(name: str) -> str:
+    """Archive member names always use forward slashes, on every platform."""
+    return name.replace("\\", "/")
 
 
 def _entries(source: Mapping[str, bytes] | Iterable[Entry]) -> list[Entry]:
@@ -54,13 +59,13 @@ def _entries(source: Mapping[str, bytes] | Iterable[Entry]) -> list[Entry]:
             raise TypeError(f"archive member name must be str, got {type(name).__name__}")
         if not isinstance(data, (bytes, bytearray, memoryview)):
             raise TypeError(f"archive member {name!r} must be bytes")
-        normalised = name.replace(os.sep, "/")
+        normalised = _normalise(name)
         if normalised.startswith("/") or ".." in normalised.split("/"):
             raise ValueError(f"archive member escapes the root: {name!r}")
         if normalised in seen:
             raise ValueError(f"duplicate archive member: {name!r}")
         seen.add(normalised)
-    return sorted(((name.replace(os.sep, "/"), bytes(data)) for name, data in items))
+    return sorted(((_normalise(name), bytes(data)) for name, data in items))
 
 
 def zip_bytes(
