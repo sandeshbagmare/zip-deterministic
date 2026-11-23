@@ -33,8 +33,8 @@ test = ["pytest>=8"]
 packages = ["src/zip_deterministic"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-q"
+testpaths = ["tests", "src"]
+addopts = "-q --doctest-modules"
 
 [tool.ruff]
 line-length = 100
