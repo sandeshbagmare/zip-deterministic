@@ -23,8 +23,8 @@ jobs:
 
   publish:
     needs: build
-    # Set the PYPI_READY repository variable once PyPI trusted publishing is
-    # configured for this project; until then the release only builds.
+    # Publishing runs from the maintainer's machine until trusted publishing is
+    # configured; set the PYPI_READY repository variable to publish from a tag.
     if: vars.PYPI_READY == 'true'
     runs-on: ubuntu-latest
     environment: pypi
