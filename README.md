@@ -70,6 +70,9 @@ python -m venv .venv
 .venv/bin/pytest
 ```
 
+The suite covers every line of the package (`pytest --cov --cov-branch`), and the
+examples in the docstrings run as tests through `--doctest-modules`.
+
 ## License
 
 MIT.
