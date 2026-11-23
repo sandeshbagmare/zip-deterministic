@@ -11,6 +11,7 @@ import pytest
 from zip_deterministic import (
     DEFAULT_DATE_TIME,
     DEFAULT_MODE,
+    now_as_zip_time,
     tar_bytes,
     write_tar,
     write_zip,
@@ -130,3 +131,31 @@ def test_gzip_reproducible_across_time(monkeypatch):
     first = tar_bytes({"a.txt": b"hello"})
     monkeypatch.setattr(time, "time", lambda: 1_900_000_000)
     assert tar_bytes({"a.txt": b"hello"}) == first
+
+
+class TestRigour:
+    """The opt-out clock helper and the tar entry points."""
+
+    def test_now_as_zip_time_is_a_six_tuple(self):
+        value = now_as_zip_time()
+        assert len(value) == 6
+        assert all(isinstance(part, int) for part in value)
+        assert value[0] >= 1980
+
+    def test_the_mode_is_carried_on_every_entry(self):
+        data = zip_bytes([("run.sh", b"#!/bin/sh\n")], mode=0o755)
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            info = archive.getinfo("run.sh")
+        assert (info.external_attr >> 16) & 0o777 == 0o755
+
+    def test_a_tar_archive_is_written_to_disk(self, tmp_path):
+        path = tmp_path / "a.tar"
+        size = write_tar(path, [("a.txt", b"hi")])
+        assert size == path.stat().st_size
+        with tarfile.open(path) as archive:
+            assert archive.getnames() == ["a.txt"]
+
+    def test_a_directory_entry_in_a_zip(self):
+        data = zip_bytes([("dir/", b"")])
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            assert archive.namelist() == ["dir/"]
